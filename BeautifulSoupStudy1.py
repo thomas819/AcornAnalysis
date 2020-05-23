@@ -74,3 +74,42 @@ links2 = soup3.find_all(href=re.compile(r'^http://'))
 print(links2)
 print()
 print(soup3.find_all(['h1', 'p']))
+print()
+print()
+
+html_data4 = """
+    <html><body>
+    <div id='hello'>
+        <a h href='http://www.naver.com'>naver</a>
+        <ul class='world'>
+            <li>안녕</li>
+            <li>반가워</li>   
+        </ul>
+    </div>
+    <div>
+        <b>hi<b>
+    </div>
+    </body></html>
+"""
+soup4 = BeautifulSoup(html_data4, 'lxml')
+a = soup4.select_one('div#hello > a').string  # id는 중복 가능 class 는 유일 '>' 는 직계자식 의미
+print(a)
+ksb = soup4.select("div#hello > ul.world > li")  # .은 class div# ul.   #과 .을 잘만쓰면된다
+print(ksb)
+
+for i in ksb:
+    print('li = ', i.string)
+
+print()
+# 주소 :https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%88%9C%EC%8B%A0
+# 원하는 태그 의 오른쪽 마우스 copy -copy selector
+# mw-content-text > div > p:nth-child(6)
+
+import urllib.request as req
+
+url = "https://ko.wikipedia.org/wiki/%EC%9D%B4%EC%88%9C%EC%8B%A0"
+wiki = req.urlopen(url)
+print(wiki)
+soups = BeautifulSoup(wiki, 'lxml')
+print(soups)
+print(soups.select("#mw-content-text > div > p")) #:nth-child(6) 는 변동성있는데이터라서 뺸
