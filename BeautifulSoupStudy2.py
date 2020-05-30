@@ -78,3 +78,4 @@ print(df.head(3))
 print("가격 평균 : ", round(df['pay'].mean(), 1))
 print("가격 표준편차 : ", round(df['pay'].std(), 1))
 
+#content > div.section.inner_sub > table.type2 > tbody > tr > td.title > a
